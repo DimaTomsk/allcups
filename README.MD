@@ -1,5 +1,7 @@
 Исключительно в образовательных целях
 
+Экспериментировать можно [тут](https://cups.online/ru/workareas/technocup-22/767/1448?is_sandbox=1)
+
 # Известные уязвимости:
 
 ## Process kill
@@ -18,6 +20,24 @@ for process in psutil.process_iter():
     if process.name() == 'python3':
         process.kill()
 ```
+
+## НЕ ПРОВЕРЕНО:
+### Рекурсивный темплейт
+```cpp
+#include<vector>
+
+template<class T>T f(T a) {
+    return f(std::vector<T>());
+}
+
+int main() {
+    f(0);
+}
+```
+
+### Инклуд самого себя
+```#include __FILE__```
+
 
 ## Доступ к файлам
 - Список файлов можно найти [здесь](files.txt). Получен с помощью
