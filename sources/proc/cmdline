@@ -1,0 +1,1 @@
+BOOT_IMAGE=/vmlinuz-3.10.0-1160.59.1.el7.x86_64 root=/dev/mapper/system-root ro crashkernel=auto rd.lvm.lv=system/root rd.lvm.lv=system/swap console=ttyS0 LANG=en_US.UTF-8 user_namespace.enable=1 namespace.unpriv_enable=1

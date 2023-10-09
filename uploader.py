@@ -91,14 +91,20 @@ def get_file_size(filename):
 def download_file(filename):
     print(f'Downloading {filename}')
 
-    write_dir = Path(f'data{filename}')
-    if not write_dir.parent.exists():
-        Path.mkdir(write_dir.parent, parents=True)
+    write_dir = Path(f'sources{filename}')
+
+    if write_dir.exists():
+        print('Already downloaded)')
+        return 0
 
     filesize = get_file_size(filename)
     if filesize == -1:
         print(f'File not found: {filename}')
         return -1
+
+    if not write_dir.parent.exists():
+        Path.mkdir(write_dir.parent, parents=True)
+
 
     print(f'File size: {filesize} symbols')
     total_submissions = (filesize + LOAD_SIZE - 1) // LOAD_SIZE
@@ -140,9 +146,10 @@ def download_file(filename):
         for tmp_name, content, submission_id in submissions:
             result += content
         with open(write_dir, 'wt') as out:
-            print(result, file=out)
+            print(result, file=out, end='')
 
     return 0
 
 
-download_file(f'/opt/client/main.py')
+for file in open('download_files.txt', 'rt'):
+    download_file(file.strip())
